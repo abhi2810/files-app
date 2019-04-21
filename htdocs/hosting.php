@@ -8,7 +8,7 @@ if(!isset($_SESSION['username']) & empty($_SESSION['username'])){
 
 $username = $_SESSION['username'];
 if (isset($_FILES) & !empty($_FILES)) {
-  $target_dir = "files/".$username."/";
+  $target_dir = "files/".$username."/hosting//";
   if (!file_exists($target_dir)) {
     mkdir($target_dir, 0777, true);
   }
@@ -101,9 +101,12 @@ if (isset($_POST) & !empty($_POST)) {
 <?php if(isset($smsg)) { ?><div class="alert alert-success" role="alert"><?php echo $smsg;?></div><?php } ?>
 <?php if(isset($fmsg)) { ?><div class="alert alert-danger" role="alert"><?php echo $fmsg;?></div><?php } ?>
 <div class="panel panel-default">
-<div class="panel-heading"><h4>Storage Section</h4></div>
+<div class="panel-heading"><h4>Hosting Section</h4></div>
  <div class="panel-body">
   <div class="col-sm-12">
+    <p>Hosted Link: <a target="_Blank" href="<?php echo 'files/'.$username.'/hosting/' ?>">
+        <?php echo 'localhost/files-app/files/'.$username.'/hosting/' ?></a>
+    </p>
     <form method="post" class="form-horizontal" enctype="multipart/form-data">
           <input type="file" name="file" class="col-sm-6 col-xs-12" id="upload">
           <input type="submit" class="btn btn-primary col-sm-6 col-xs-12" value="Upload" >
@@ -121,7 +124,7 @@ if (isset($_POST) & !empty($_POST)) {
     </thead>
     <?php
       $count = 0;
-      foreach(glob('files/'.$username.'/*.*') as $file) {
+      foreach(glob('files/'.$username.'/hosting/*.*') as $file) {
         $count++;
         echo "<tr>";
         echo "<td>".substr($file,strrpos($file,'/')+1)."</td>".
